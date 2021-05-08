@@ -1,8 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Page from './components/App';
+import App from './components/App';
 
 ReactDOM.render(
-    <Page />,
+    <App />,
     document.querySelector('#root'),
 );

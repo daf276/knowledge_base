@@ -1,34 +1,29 @@
 import Header from "./header";
 import Footer from "./footer";
-import Article from "./article";
-import Categories from "./categories";
-import Typography from '@material-ui/core/Typography';
-import Container from '@material-ui/core/Container';
+import {
+    BrowserRouter as Router,
+    Switch,
+    Route,
+} from "react-router-dom";
+import Category from "./categories";
 
-function Page() {
+function App() {
     return (
-        <div>
-            <Header/>
-            <Categories/>
-            <Footer/>
-        </div>
+        <Router>
+            <div>
+                <Header/>
+                <Switch>
+                    <Route exact path="/">
+                        <Category/>
+                    </Route>
+                    <Route path="/:category">
+                        <Category/>
+                    </Route>
+                </Switch>
+                <Footer/>
+            </div>
+        </Router>
     );
 }
 
-function Home() {
-    return (
-        <div>
-            <Container maxWidth="sm">
-                <Typography component="h1" variant="h2" align="center" color="textPrimary" gutterBottom>
-                    Overview
-                </Typography>
-                <Typography variant="h5" align="center" color="textSecondary" paragraph>
-                    Overview over the available categories
-                </Typography>
-            </Container>
-            <Categories/>
-        </div>
-    );
-}
-
-export default Page;
+export default App;

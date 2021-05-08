@@ -13,14 +13,16 @@
   "pluginOptions": {},
   "attributes": {
     "title": {
-      "type": "string"
+      "type": "string",
+      "required": true
     },
     "content": {
-      "type": "richtext"
+      "type": "richtext",
+      "required": true
     },
     "article": {
-      "model": "article",
-      "via": "sections"
+      "via": "sections",
+      "model": "article"
     }
   }
 }

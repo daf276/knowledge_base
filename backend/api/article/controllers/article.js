@@ -1,16 +1,10 @@
 const { sanitizeEntity } = require('strapi-utils');
 
 module.exports = {
-  /**
-   * Retrieve a record.
-   *
-   * @return {Object}
-   */
-
-  async findTitle(ctx) {
+	async findOne(ctx) {
     const { title } = ctx.params;
 
-    const entity = await strapi.services.restaurant.findOne({ title });
+    const entity = await strapi.services.article.findOne({ title });
     return sanitizeEntity(entity, { model: strapi.models.article });
   },
 };

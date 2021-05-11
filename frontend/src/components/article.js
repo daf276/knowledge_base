@@ -9,6 +9,7 @@ import {LoadSections} from "../hooks/loadSections";
 import {List, ListItem, ListItemText} from "@material-ui/core";
 import SearchBar from "./searchBar";
 import {HashLink} from 'react-router-hash-link';
+import Markdown from 'markdown-to-jsx';
 
 export default function Article() {
     return (
@@ -75,9 +76,7 @@ function Sections() {
                 <Typography id={`${section.title}`} component="h3" variant="h3" align="left" color="textPrimary" gutterBottom>
                     {section.title}
                 </Typography>
-                <Typography variant="h6" align="left" color="textSecondary" paragraph>
-                    {section.content}
-                </Typography>
+                <Markdown>{section.content}</Markdown>
             </Container>
         ))
     )

@@ -1,15 +1,9 @@
 import Container from "@material-ui/core/Container";
-import {List, ListItemText} from "@material-ui/core";
-import {LoadAllCategories, LoadCategory} from "../hooks/loadCategories"
-import {LoadArticle} from "../hooks/loadArticles";
-import {useParams} from "react-router-dom";
+import {ListItemText} from "@material-ui/core";
+import {LoadAllCategories, LoadCategory, LoadArticle} from "../hooks/loadData"
+import {useParams, useRouteMatch} from "react-router-dom";
 import ListItemLink from "./listItemLink";
-
-const flexContainer = {
-    display: 'flex',
-    flexDirection: 'row',
-    padding: 0,
-};
+import Grid from "@material-ui/core/Grid";
 
 export default function CategoryTree() {
     const articleTitle = useParams().articleTitle;
@@ -23,7 +17,7 @@ export default function CategoryTree() {
     if (categories.loading) return <div>Loading...</div>;
 
     let currentPage;
-    if(articleTitle) {
+    if (articleTitle) {
         if (currentArticle.error) return <div>Error</div>;
         if (currentArticle.loading) return <div>Loading...</div>;
         currentPage = currentArticle.data;
@@ -36,16 +30,19 @@ export default function CategoryTree() {
     return (
         <div>
             <Container maxWidth="lg">
-                <List className="list-horizontal-display" style={flexContainer}>
+                <Grid container direction="row" spacing={1}>
                     {
                         buildCategoryTree(categories, currentPage).map(categoryTitle => (
-                            <ListItemLink href={`/${categoryTitle}`}>
-                                <ListItemText primary={`${categoryTitle}`}/>
-                            </ListItemLink>
+                            <Grid item key={categoryTitle} xs={2}>
+                                <ListItemLink href={`/${categoryTitle}`}>
+                                    <ListItemText primary={`${categoryTitle}`}/>
+                                    <ListItemText primary={">"}/>
+                                </ListItemLink>
+                            </Grid>
                         ))
                     }
-                    <ListItemText primary={`${currentPage.title}`}/>
-                </List>
+                    <CurrentPage currentPage={currentPage}/>
+                </Grid>
             </Container>
         </div>
     )
@@ -58,4 +55,14 @@ function buildCategoryTree(categories, currentPage) {
         currentPage = categories.data.filter(category => category.title === currentPage.category.title)[0];
     }
     return array.reverse(); //Reverse because we want a top-down tree and its currently bottom-up
+}
+
+function CurrentPage(data) {
+    return (
+        <Grid item key={data.currentPage.title} xs={2}>
+            <ListItemLink href={`${useRouteMatch().url}`}>
+                <ListItemText primary={`${data.currentPage.title}`}/>
+            </ListItemLink>
+        </Grid>
+    )
 }

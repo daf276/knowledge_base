@@ -4,8 +4,7 @@ import {
 import Container from "@material-ui/core/Container";
 import Typography from "@material-ui/core/Typography";
 import CategoryTree from "./categoryTree";
-import {LoadArticle} from "../hooks/loadArticles";
-import {LoadSections} from "../hooks/loadSections";
+import {LoadArticle, LoadSections} from "../hooks/loadData";
 import {List, ListItem, ListItemText} from "@material-ui/core";
 import SearchBar from "./searchBar";
 import {HashLink} from 'react-router-hash-link';

@@ -8,8 +8,7 @@ import {
     useParams,
 } from "react-router-dom";
 import CategoryTree from "./categoryTree";
-import {LoadCategory, LoadSubCategories} from "../hooks/loadCategories";
-import {LoadArticles} from "../hooks/loadArticles";
+import {LoadCategory, LoadSubCategories, LoadArticles} from "../hooks/loadData";
 import SearchBar from "./searchBar";
 import {makeStyles} from "@material-ui/core/styles";
 

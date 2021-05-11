@@ -1,14 +1,14 @@
 import {
-    useParams,
+    useParams, useRouteMatch,
 } from "react-router-dom";
 import Container from "@material-ui/core/Container";
 import Typography from "@material-ui/core/Typography";
 import CategoryTree from "./categoryTree";
 import {LoadArticle} from "../hooks/loadArticles";
 import {LoadSections} from "../hooks/loadSections";
-import {List, ListItemText} from "@material-ui/core";
-import ListItemLink from "./listItemLink";
+import {List, ListItem, ListItemText} from "@material-ui/core";
 import SearchBar from "./searchBar";
+import {HashLink} from 'react-router-hash-link';
 
 export default function Article() {
     return (
@@ -37,6 +37,7 @@ function Title() {
 }
 
 function SectionOverview() {
+    const {url} = useRouteMatch();
     const sections = LoadSections(useParams().articleTitle);
     if (sections.error) return <div>Error</div>;
     if (sections.loading) return <div>Loading...</div>;
@@ -50,9 +51,11 @@ function SectionOverview() {
                 {
                     sections.data.map(section => (
                         <Container key={section.id} maxWidth="md">
-                            <ListItemLink href={`#${section.title}`}>
-                                <ListItemText primary={`${section.title}`}/>
-                            </ListItemLink>
+                            <HashLink to={`${url}#${section.title}`}>
+                                <ListItem button>
+                                    <ListItemText primary={`${section.title}`}/>
+                                </ListItem>
+                            </HashLink>
                         </Container>
                     ))
                 }
@@ -69,8 +72,7 @@ function Sections() {
     return (
         sections.data.map(section => (
             <Container key={section.id} maxWidth="md">
-                {/*TODO make it so this is the anchor*/}
-                <Typography component="h3" variant="h3" align="left" color="textPrimary" gutterBottom>
+                <Typography id={`${section.title}`} component="h3" variant="h3" align="left" color="textPrimary" gutterBottom>
                     {section.title}
                 </Typography>
                 <Typography variant="h6" align="left" color="textSecondary" paragraph>

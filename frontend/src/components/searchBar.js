@@ -12,7 +12,7 @@ const useStyles = makeStyles({
 export default function SearchBar() {
     const classes = useStyles();
 
-    const [keyWord, setKeyWord] = useState(null);
+    const [keyWord, setKeyWord] = useState("");
     const [submitted, setSubmitted] = useState(false);
 
     const handleSubmit = (event) => {

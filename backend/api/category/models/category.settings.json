@@ -15,11 +15,13 @@
     "title": {
       "type": "string",
       "required": true,
-      "unique": true
+      "unique": true,
+      "searchable": true
     },
     "description": {
       "type": "text",
-      "required": true
+      "required": true,
+      "searchable": true
     },
     "categories": {
       "collection": "category",
@@ -28,6 +30,10 @@
     "category": {
       "model": "category",
       "via": "categories"
+    },
+    "articles": {
+      "via": "category",
+      "collection": "article"
     }
   }
 }

@@ -14,11 +14,13 @@
   "attributes": {
     "title": {
       "type": "string",
-      "required": true
+      "required": true,
+      "searchable": true
     },
     "content": {
       "type": "richtext",
-      "required": true
+      "required": true,
+      "searchable": true
     },
     "article": {
       "via": "sections",

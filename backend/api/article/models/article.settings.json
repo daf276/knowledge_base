@@ -18,7 +18,8 @@
       "unique": true
     },
     "category": {
-      "model": "category"
+      "model": "category",
+      "via": "articles"
     },
     "sections": {
       "via": "article",

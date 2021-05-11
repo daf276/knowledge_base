@@ -28,7 +28,7 @@ function Results() {
     const uniqueResults = uniqeBy(LoadSearchResults(), JSON.stringify);
 
     return (uniqueResults && uniqueResults.map(result => (
-        <Grid item xs={12}>
+        <Grid item key={result.id} xs={12}>
             <Link to={`/${result.category.title}/${result.title}`}>
                 <Card>
                     <CardContent>

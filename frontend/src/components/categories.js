@@ -58,7 +58,7 @@ function SubCategories() {
             <Grid container spacing={4}>
                 {
                     subCategories.data.map(category => (
-                        <Grid item xs={4}>
+                        <Grid item key={category.id} xs={4}>
                             <Link to={`/${category.title}`}>
                                 <Card>
                                     <CardContent>
@@ -90,7 +90,7 @@ function Articles() {
         <Container className={classes.articles} maxWidth="md">
             <Grid container direction="column" spacing={2}>{
                 articles.data.map(article => (
-                    <Grid item xs={12}>
+                    <Grid item key={article.id} xs={12}>
                         <Link to={`/${article.category.title}/${article.title}`}>
                             <Card>
                                 <CardContent>

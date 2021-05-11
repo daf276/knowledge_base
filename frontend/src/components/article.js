@@ -8,10 +8,12 @@ import {LoadArticle} from "../hooks/loadArticles";
 import {LoadSections} from "../hooks/loadSections";
 import {List, ListItemText} from "@material-ui/core";
 import ListItemLink from "./listItemLink";
+import SearchBar from "./searchBar";
 
 export default function Article() {
     return (
         <div>
+            <SearchBar/>
             <CategoryTree/>
             <Title/>
             <SectionOverview/>
@@ -47,9 +49,11 @@ function SectionOverview() {
             <List>
                 {
                     sections.data.map(section => (
-                        <ListItemLink href={`#${section.title}`}>
-                            <ListItemText primary={`${section.title}`}/>
-                        </ListItemLink>
+                        <Container key={section.id} maxWidth="md">
+                            <ListItemLink href={`#${section.title}`}>
+                                <ListItemText primary={`${section.title}`}/>
+                            </ListItemLink>
+                        </Container>
                     ))
                 }
             </List>
@@ -64,7 +68,7 @@ function Sections() {
 
     return (
         sections.data.map(section => (
-            <Container maxWidth="md">
+            <Container key={section.id} maxWidth="md">
                 {/*TODO make it so this is the anchor*/}
                 <Typography component="h3" variant="h3" align="left" color="textPrimary" gutterBottom>
                     {section.title}

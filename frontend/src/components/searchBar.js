@@ -6,6 +6,7 @@ import {makeStyles} from "@material-ui/core/styles";
 const useStyles = makeStyles({
   searchBar: {
     marginTop: '2rem',
+    marginBottom: '2rem',
   },
 });
 

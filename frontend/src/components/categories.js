@@ -57,8 +57,8 @@ function MainPageDescription() {
 
 function MainCategories() {
   const allCategories = LoadAllCategories();
-  if (allCategories.error) return <ErrorMsg errorMsg={"Subcategories could not be loaded."}/>;
   if (allCategories.loading) return <LoadingCircle/>;
+  if (allCategories.error || allCategories.data.error) return <ErrorMsg errorMsg={"Subcategories could not be loaded."}/>;
 
   const topLevelCategories = allCategories.data.filter(category => !category.category);
   return <RenderSubCategories subCategories={topLevelCategories}/>
@@ -66,8 +66,8 @@ function MainCategories() {
 
 function CategoryTitleAndDescription() {
   const category = LoadCategory(useParams().categoryTitle);
-  if (category.error) return <ErrorMsg errorMsg={"Category does not exist or could not be loaded."}/>;
   if (category.loading) return <LoadingCircle/>;
+  if (category.error) return <ErrorMsg errorMsg={"Category does not exist or could not be loaded."}/>;
 
   return (
     <Container maxWidth="sm">
@@ -83,8 +83,8 @@ function CategoryTitleAndDescription() {
 
 function SubCategories() {
   const subCategories = LoadSubCategories(useParams().categoryTitle);
-  if (subCategories.error) return <ErrorMsg errorMsg={"Subcategories could not be loaded."}/>;
   if (subCategories.loading) return <LoadingCircle/>;
+  if (subCategories.error || subCategories.data.error) return <ErrorMsg errorMsg={"Subcategories could not be loaded."}/>;
   if (!subCategories.data) return null;
   return <RenderSubCategories subCategories={subCategories.data}/>
 }
@@ -120,8 +120,8 @@ function Articles() {
   const classes = useStyles();
 
   const articles = LoadArticles(useParams().categoryTitle);
-  if (articles.error) return <ErrorMsg errorMsg={"Articles of this category could not be loaded."}/>;
   if (articles.loading) return <LoadingCircle/>;
+  if (articles.error || articles.data.error) return <ErrorMsg errorMsg={"Articles of this category could not be loaded."}/>;
 
   return (
     <Container className={classes.articles} maxWidth="md">

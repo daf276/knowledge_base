@@ -1,10 +1,11 @@
 import useSWR from "swr";
 
-const url = "http://localhost:1337/"
+//const url = "https://knowledge-base-example.herokuapp.com/"
+export const BASE_URL = "http://localhost:1337/"
 const fetcher = (url) => fetch(url).then(res => res.json())
 
 function Load(suburl) {
-    const {data, error} = useSWR(`${url}${suburl}`, fetcher)
+    const {data, error} = useSWR(`${BASE_URL}${suburl}`, fetcher)
 
     return {
         data: data,
@@ -14,12 +15,10 @@ function Load(suburl) {
 }
 
 export function LoadCategory(title) {
-    if (!title) title = "Main Page"; // If our category doesnt have a title that means were on the Main Page, which for now is also just a category
     return Load(`categories/${title}`);
 }
 
 export function LoadSubCategories(title) {
-    if (!title) title = "Main Page"; // If our category doesnt have a title that means were on the Main Page, which for now is also just a category
     return Load(`categories?category.title=${title}`);
 }
 
@@ -33,10 +32,6 @@ export function LoadArticle(title) {
 
 export function LoadArticles(title) {
     return Load(`articles?category.title=${title}`);
-}
-
-export function LoadSections(title) {
-    return Load(`sections?article.title=${title}`);
 }
 
 export function SearchCategories(keyword) {

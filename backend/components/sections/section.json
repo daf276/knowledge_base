@@ -5,14 +5,18 @@
     "icon": "ad",
     "description": ""
   },
-  "options": {},
+  "options": {
+    "searchable": true
+  },
   "attributes": {
     "title": {
       "type": "string",
-      "required": true
+      "required": true,
+      "searchable": true
     },
     "content": {
-      "type": "richtext"
+      "type": "richtext",
+      "searchable": true
     }
   }
 }

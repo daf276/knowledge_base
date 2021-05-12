@@ -54,7 +54,6 @@ function Results() {
 }
 
 function deduplicate(results) {
-  console.log(results);
   if (!results) return null;
 
   let seen = {};
@@ -70,9 +69,10 @@ function LoadSearchResults() {
 
   const articles = SearchArticles(keyWord);
   const categories = SearchCategories(keyWord);
+  //const sections = SearchSections(keyWord);
 
-  if (articles.error || categories.error) return {results: null, loading: false, error: true};
   if (articles.loading || categories.loading) return {results: null, loading: true, error: false};
+  if (articles.error || categories.error || categories.data.error || articles.data.error) return {results: null, loading: false, error: true};
 
   const results = [];
 

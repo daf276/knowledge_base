@@ -14,17 +14,17 @@ export default function CategoryTree() {
   const currentArticle = LoadArticle(articleTitle);
   const currentCategory = LoadCategory(categoryTitle);
 
-  if (categories.error) return null;
   if (categories.loading) return <LoadingCircle/>;
+  if (categories.error || categories.data.error) return null;
 
   let currentPage;
   if (articleTitle) {
-    if (currentArticle.error) return null;
     if (currentArticle.loading) return <LoadingCircle/>;
+    if (currentArticle.error || currentArticle.data.error) return null;
     currentPage = currentArticle.data;
   } else if (categoryTitle) {
-    if (currentCategory.error) return null;
     if (currentCategory.loading) return <LoadingCircle/>;
+    if (currentCategory.error || currentCategory.data.error) return null;
     currentPage = currentCategory.data;
   }
 

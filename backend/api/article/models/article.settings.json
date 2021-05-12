@@ -24,7 +24,8 @@
     "sections": {
       "type": "component",
       "repeatable": true,
-      "component": "sections.section"
+      "component": "sections.section",
+      "searchable": true
     }
   }
 }

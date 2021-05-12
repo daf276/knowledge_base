@@ -15,13 +15,11 @@
     "title": {
       "type": "string",
       "required": true,
-      "unique": true,
-      "searchable": true
+      "unique": true
     },
     "description": {
       "type": "text",
-      "required": true,
-      "searchable": true
+      "required": true
     },
     "categories": {
       "collection": "category",

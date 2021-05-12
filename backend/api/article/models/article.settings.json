@@ -22,8 +22,9 @@
       "via": "articles"
     },
     "sections": {
-      "via": "article",
-      "collection": "section"
+      "type": "component",
+      "repeatable": true,
+      "component": "sections.section"
     }
   }
 }

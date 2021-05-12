@@ -6,9 +6,9 @@ import {ThemeProvider} from '@material-ui/core/styles';
 import theme from './theme';
 
 ReactDOM.render(
-    <ThemeProvider theme={theme}>
-        <CssBaseline/>
-        <App/>
-    </ThemeProvider>,
-    document.querySelector('#root'),
+  <ThemeProvider theme={theme}>
+    <CssBaseline/>
+    <App/>
+  </ThemeProvider>,
+  document.querySelector('#root'),
 );

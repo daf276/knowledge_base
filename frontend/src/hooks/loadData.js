@@ -43,5 +43,5 @@ export function SearchArticles(keyword) {
 }
 
 export function SearchSections(keyword) {
-    return Load(`sections?_q=${keyword}`);
+    return Load(`content-search?_q=${keyword}`);
 }

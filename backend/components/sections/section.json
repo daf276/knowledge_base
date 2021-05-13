@@ -6,7 +6,7 @@
     "description": ""
   },
   "options": {
-    "searchable": true
+  	"searchable": true
   },
   "attributes": {
     "title": {

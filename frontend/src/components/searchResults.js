@@ -71,15 +71,23 @@ function deduplicate(results) {
 }
 
 function LoadSearchResults() {
-  //TODO make it possible to search for sections again
   const keyWord = queryString.parse(useLocation().search).q;
 
   const articles = SearchArticles(keyWord);
   const categories = SearchCategories(keyWord);
-  //const sections = SearchSections(keyWord);
+  const contentSearchArticles = SearchSections(keyWord);
 
-  if (articles.loading || categories.loading) return {results: null, loading: true, error: false};
-  if (articles.error || categories.error || categories.data.error || articles.data.error) return {results: null, loading: false, error: true};
+  if (articles.loading || categories.loading || contentSearchArticles.loading) return {
+    results: null,
+    loading: true,
+    error: false
+  };
+  if (articles.error || categories.error || categories.data.error || articles.data.error ||
+    contentSearchArticles.error || contentSearchArticles.data.error) return {
+    results: null,
+    loading: false,
+    error: true
+  };
 
   const results = [];
 
@@ -92,6 +100,11 @@ function LoadSearchResults() {
   articles.data.forEach(function (article) {
     results.push(article);
   })
+
+  //for some reason the content search returns really weird responses, so we have to process them like this
+  for(let key in contentSearchArticles.data){
+    results.push(contentSearchArticles.data[key]);
+  }
 
   return {results: results, loading: false, error: false}
 }

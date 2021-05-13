@@ -72,18 +72,13 @@ function Sections() {
   if (article.error || !article.data) return <ErrorMsg errorMsg={"This Article does not exist"}/>;
   if (!article.data.sections || article.data.sections.length === 0) return <ErrorMsg errorMsg={"This Article does not have any content"}/>;
 
-  const prepareMarkdown = (content) => {
-    //TODO prepare markdown for images and videos here
-    return content;
-  }
-
   return (
     article.data.sections.map(section => (
       <Container key={section.id} maxWidth="md">
         <Typography id={`${section.title}`} component="h3" variant="h3" align="left" color="textPrimary" gutterBottom>
           {section.title}
         </Typography>
-        <Markdown>{prepareMarkdown(section.content)}</Markdown>
+        <Markdown>{section.content}</Markdown>
       </Container>
     ))
   )

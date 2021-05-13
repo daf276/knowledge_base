@@ -14,7 +14,13 @@ import LoadingCircle from "./loadingCircle";
 
 const useStyles = makeStyles((theme) => ({
   results: {
-    marginTop: '4rem',
+    marginTop: '2rem',
+  },
+  card: {
+    textDecoration: "none",
+  },
+  cardTitle: {
+    color: theme.palette.primary.main,
   },
 }));
 
@@ -33,6 +39,7 @@ export default function SearchResults() {
 }
 
 function Results() {
+  const classes = useStyles();
   const {results, loading, error} = LoadSearchResults();
   if (loading) return <LoadingCircle/>;
   if (error || !results || results.length === 0) return <NoResults/>;
@@ -40,10 +47,10 @@ function Results() {
   const uniqueResults = deduplicate(results);
   return (uniqueResults.map(result => (
     <Grid item key={result.id} xs={12}>
-      <Link to={`/${result.category.title}/${result.title}`}>
+      <Link to={`/${result.category.title}/${result.title}`} className={classes.card}>
         <Card>
           <CardContent>
-            <Typography gutterBottom variant="h5" component="h2">
+            <Typography className={classes.cardTitle} variant="h5" component="h5">
               {result.title}
             </Typography>
           </CardContent>

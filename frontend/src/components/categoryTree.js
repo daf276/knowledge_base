@@ -1,12 +1,22 @@
-import Container from "@material-ui/core/Container";
-import {ListItemText} from "@material-ui/core";
+import {Breadcrumbs, Link} from "@material-ui/core";
 import {LoadAllCategories, LoadCategory, LoadArticle} from "../hooks/loadData"
-import {useParams, useRouteMatch} from "react-router-dom";
-import ListItemLink from "./listItemLink";
-import Grid from "@material-ui/core/Grid";
+import {useParams} from "react-router-dom";
 import LoadingCircle from "./loadingCircle";
+import Typography from "@material-ui/core/Typography";
+import {makeStyles} from "@material-ui/core/styles";
+
+const useStyles = makeStyles((theme) => ({
+  pageTree: {
+    marginBottom: '2rem',
+    display: 'flex',
+    justifyContent: 'center',
+    color: theme.palette.primary.dark
+  },
+}));
 
 export default function CategoryTree() {
+  const classes = useStyles();
+
   const articleTitle = useParams().articleTitle;
   const categoryTitle = useParams().categoryTitle;
 
@@ -29,23 +39,19 @@ export default function CategoryTree() {
   }
 
   return (
-    <div>
-      <Container maxWidth="lg">
-        <Grid container direction="row" spacing={1}>
-          {
-            buildCategoryTree(categories, currentPage).map(categoryTitle => (
-              <Grid item key={categoryTitle} xs={2}>
-                <ListItemLink href={`/${categoryTitle}`}>
-                  <ListItemText primary={`${categoryTitle}`}/>
-                  <ListItemText primary={">"}/>
-                </ListItemLink>
-              </Grid>
-            ))
-          }
-          <CurrentPage currentPage={currentPage}/>
-        </Grid>
-      </Container>
-    </div>
+    <Breadcrumbs className={classes.pageTree} separator="›">
+      <Link color="inherit" href="/" key="Home">
+        Home
+      </Link>
+      {
+        buildCategoryTree(categories, currentPage).map(categoryTitle => (
+          <Link color="inherit" href={`/${categoryTitle}`} key={categoryTitle}>
+            {categoryTitle}
+          </Link>
+        ))
+      }
+      <Typography color="textPrimary">{currentPage.title}</Typography>
+    </Breadcrumbs>
   )
 }
 
@@ -56,14 +62,4 @@ function buildCategoryTree(categories, currentPage) {
     currentPage = categories.data.filter(category => category.title === currentPage.category.title)[0];
   }
   return array.reverse(); //Reverse because we want a top-down tree and its currently bottom-up
-}
-
-function CurrentPage(data) {
-  return (
-    <Grid item key={data.currentPage.title} xs={2}>
-      <ListItemLink href={`${useRouteMatch().url}`}>
-        <ListItemText primary={`${data.currentPage.title}`}/>
-      </ListItemLink>
-    </Grid>
-  )
 }
